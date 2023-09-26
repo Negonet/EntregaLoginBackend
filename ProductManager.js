@@ -60,7 +60,7 @@ class ProductManager {
             const find = product.find(product => product.id === id)
         
             if (find) {
-            console.log(find)   
+                return find   
             } else {
             console.log('Not Found')
             }
@@ -74,7 +74,7 @@ class ProductManager {
             const products = await this.getProducts()
             const newProducts = products.filter(prod => prod.id!==id)
             await fs.promises.writeFile(path,JSON.stringify(newProducts))
-            console.log(newProducts)
+            return newProducts
 
         } catch(err) {
             return err
@@ -86,9 +86,9 @@ class ProductManager {
 
 async function productinf () {
     const product = new ProductManager()
-    await product.addNew('Taza','blanca',40,'tazablanca',3,3)
-    await product.addNew('Plato','gris',50,'platogris',5,5)
-    await product.addNew('Tenedor','inox',30,'tenedorinox',4,3)
+    //await product.addNew('Taza','blanca',40,'tazablanca',3,3)
+    //await product.addNew('Plato','gris',50,'platogris',5,5)
+    //await product.addNew('Tenedor','inox',30,'tenedorinox',4,3)
     //await product.deleteProduct(3)
     //await product.getProductById(1)
     //await product.getProducts()

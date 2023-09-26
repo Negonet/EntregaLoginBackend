@@ -8,8 +8,10 @@ app.get('/products', async(req,res)=> {
     res.json({message:'Productos encontrados', prod})
 })
 
-app.get('/products/:pid', (req,res)=>{
-
+app.get('/products/:id', async(req,res)=>{
+    const {id} = req.params
+    const prod = await products.getProductById(+id)
+    res.json({message:'Id Producto', prod})
 })
 
 
