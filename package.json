@@ -5,7 +5,7 @@
   "type": "module",
   "main": "ProductManager.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon source/server.js"
   },
   "keywords": [],
   "author": "",

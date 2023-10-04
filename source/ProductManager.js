@@ -6,6 +6,7 @@ class ProductManager {
 
     async getProducts(queryObj){
         const {limit} = queryObj;
+
         try {
             if (fs.existsSync(path)) {
                 const productFile = await fs.promises.readFile(path, 'utf-8')
@@ -60,13 +61,13 @@ class ProductManager {
 
     async deleteProduct(idd){
         try{
-            //console.log(idd)
+            console.log(idd)
             const products = await this.getProducts({})
-            const findId = products.findIndex((prod) => prod.id === idd)
+            const findId = products.filter((prod) => prod.id === idd)
             console.log(findId)
-            if (findId !== -1) {
-                products.splice(findId, 1)
-                await fs.promises.writeFile(path,JSON.stringify(products))
+            if (findId) {
+                const neWProdArr = products.filter((prod) => prod.id !== idd)
+                await fs.promises.writeFile(path,JSON.stringify(neWProdArr))
             } else {
                 console.log('no se encuentra el producto')
             }
