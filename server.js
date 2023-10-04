@@ -40,7 +40,26 @@ app.post ('/products', async (req,res) => {
 })
 
 
-app.put ('/:pid')
+app.put ('/products/:pid', async (req,res) => {
+    try {
+        const updated = await products.updateProduct(req.body)
+        res.status(200).json({message:'Producto actualizado', updated});
+    } catch (err) {
+        res.status(500).json({message:err.message});
+    }
+    
+})
+
+app.delete('/products/:pid', async (req,res) => {
+    try {
+        const idd = req.params.pid
+        //console.log(idd)
+        const deleted = await products.deleteProduct(idd)
+        //console.log(deleted)
+    } catch (err) {
+        res.status(500).json({message:err.message});
+    }
+})
 
 app.listen(8080,()=>{
     console.log('listen!');
