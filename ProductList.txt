@@ -1,1 +1,0 @@
-[{"title":"Taza","description":"blanca","price":40,"thumbnail":"tazablanca","code":3,"stock":3,"id":1},{"title":"Plato","description":"gris","price":50,"thumbnail":"platogris","code":5,"stock":5,"id":2},{"title":"Tenedor","description":"inox","price":30,"thumbnail":"tenedorinox","code":4,"stock":3,"id":3}]
