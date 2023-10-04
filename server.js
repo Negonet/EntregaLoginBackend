@@ -16,8 +16,7 @@ app.get('/products', async(req,res)=> {
 
 app.get('/products/:pid', async(req,res)=>{
     try {
-        const {id} = req.params
-        const prod = await products.getProductById(+id);
+        const prod = await products.getProductById(+req.params.pid);
         res.status(200).json({message:'Id Producto', prod});
     } catch (err) {
         res.status(500).json({message:err.message});
@@ -39,6 +38,9 @@ app.post ('/products', async (req,res) => {
         res.status(500).json({message:err.message});
     }
 })
+
+
+app.put ('/:pid')
 
 app.listen(8080,()=>{
     console.log('listen!');

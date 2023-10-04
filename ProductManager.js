@@ -46,13 +46,12 @@ class ProductManager {
         }}
     async getProductById(id){
         try {
-            const product = await this.getProducts()
-            const find = product.find(product => product.id === id)
-        
-            if (find) {
-                return find   
+            const products = await this.getProducts({})
+            const found = products.find((product) => product.id === id)
+            if (found) {
+                return found   
             } else {
-            console.log('Not Found')
+            console.log('Producto no encontrado')
             }
 
         } catch (err){
