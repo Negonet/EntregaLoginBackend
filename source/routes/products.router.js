@@ -3,7 +3,7 @@ import { products } from "../ProductManager.js";
 
 const router = Router();
 
-router.get('/api/products', async(req,res)=> {
+router.get('/', async(req,res)=> {
     try {
         const prod = await products.getProducts(req.query);
         res.status(200).json({message:'Productos encontrados', prod});
@@ -13,7 +13,7 @@ router.get('/api/products', async(req,res)=> {
     
 });
 
-router.get('/api/products/:pid', async(req,res)=>{
+router.get('/:pid', async(req,res)=>{
     try {
         const prod = await products.getProductById(+req.params.pid);
         res.status(200).json({message:'Id Producto', prod});
@@ -23,7 +23,7 @@ router.get('/api/products/:pid', async(req,res)=>{
     
 });
 
-router.post ('/api/products', async (req,res) => {
+router.post ('/', async (req,res) => {
     const { title, description, price, code, stock, category} = req.body
 
     if(!title || !description || !price || !code || !stock || !category){
@@ -39,7 +39,7 @@ router.post ('/api/products', async (req,res) => {
 });
 
 
-router.put ('/api/products/:pid', async (req,res) => {
+router.put ('/:pid', async (req,res) => {
     try {
         const updated = await products.updateProduct(req.body)
         res.status(200).json({message:'Producto actualizado', updated});
@@ -49,7 +49,7 @@ router.put ('/api/products/:pid', async (req,res) => {
     
 });
 
-router.delete('/api/products/:pid', async (req,res) => {
+router.delete('/:pid', async (req,res) => {
     try {
         const idd = req.params.pid
         //console.log(idd)

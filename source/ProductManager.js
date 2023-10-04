@@ -45,6 +45,7 @@ class ProductManager {
         } catch (err) {
             return err 
         }}
+
     async getProductById(id){
         try {
             const products = await this.getProducts({})
@@ -98,17 +99,6 @@ class ProductManager {
 
 
 
-async function productinf () {
-    const product = new ProductManager()
-    //await product.addNew('Taza','blanca',40,'tazablanca',3,3,'basar')
-    //await product.addNew('Plato','gris',50,'platogris',5,5,'basar')
-    //await product.addNew('Tenedor','inox',30,'tenedorinox',4,3,'basar')
-    //await product.deleteProduct(3)
-    //await product.getProductById(1)
-    //await product.getProducts()
-    
-}
 
-productinf()
 
 export const products = new ProductManager();
