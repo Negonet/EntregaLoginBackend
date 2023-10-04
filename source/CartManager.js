@@ -27,7 +27,7 @@ class CartManager {
                 id=readProd[readProd.length-1].id+1
             }
             const create = {...newCart,id}
-            const found = products.find((item) => 
+            const found = readProd.find((item) => 
                  item.id === create.id) 
                 if (!found) {
                     readProd.push(create)
