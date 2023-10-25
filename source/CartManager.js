@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs, { read } from 'fs'
 
 const path = 'carrito.json'
 
@@ -18,29 +18,75 @@ class CartManager {
     
     async createCart(newCart){
         try {
-            console.log(newCart)
-            const readProd = await this.getCart({})
+            const readCart = await this.getCart({});
+            
             let id
-            if (!readProd.length){
+            if (!readCart.length){
                 id=1
-            } else {
-                id=readProd[readProd.length-1].id+1
+
+            } else if (readCart.lenght > 0) {
+                id=readCart[readCart.length-1].id+1
+
             }
             const create = {...newCart,id}
-            const found = readProd.find((item) => 
-                 item.id === create.id) 
-                if (!found) {
-                    readProd.push(create)
-                    await fs.promises.writeFile(path, JSON.stringify(readProd))
-                    return readProd
-                } else {
+            console.log(create)
+            if (create.id === 1) {
+                    let readCart = []
+                    readCart.push(create)
+                    await fs.promises.writeFile(path, JSON.stringify(readCart))
                     
-                    console.log('Carrito ya creado')
-                }
+            } else {
+
+                readCart.push(create)
+                await fs.promises.writeFile(path, JSON.stringify(readCart))
+            }
+            
+            console.log(readCart)
+            
+            return create
+
         } catch (err) {
             return err 
         }}
 
+
+    async searchCart(id) {
+        try {
+            const readCart = await this.getCart({});
+            const found = readCart.find((cart) => cart.id === id)
+            if (found) {
+                return found   
+            } else {
+            console.log('Carrito no encontrado')
+            }            
+
+        } catch (error) {
+            
+    }}
+
+
+    async updateCart (prod) {
+        try {
+            const readCart = await this.getCart({})
+            const updated = readCart.findIndex((cart) => cart.id === prod.id)
+            console.log(updated)
+            if ( updated >= 0 ) {
+                readCart[updated] = prod;
+                await fs.promises.writeFile(path ,JSON.stringify(readCart))
+                console.log(prod)
+            } 
+                else{
+                console.log('no se encuentra el carrito')
+            }
+        } catch (err) {
+            return err
+        }
+    }
+
+
 }
+
+
+
 
 export const carrito = new CartManager();

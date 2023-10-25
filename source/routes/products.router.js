@@ -33,7 +33,7 @@ router.post ('/', async (req,res) => {
         const crearProducto = await products.addNew(req.body)
         //console.log(crearProducto)
         res.status(200).json({message:'Producto creado', crearProducto});
-    } catch (error) {
+    } catch (err) {
         res.status(500).json({message:err.message});
     }
 });

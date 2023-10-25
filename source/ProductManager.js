@@ -23,7 +23,9 @@ class ProductManager {
         
     async addNew(product){
         try {
-            const products = await this.getProducts({})
+            const productsFile = await fs.promises.readFile(path, 'utf-8')
+            const products = JSON.parse(productsFile)
+
             let id
             if (!products.length){
                 id=1
