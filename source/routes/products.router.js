@@ -2,7 +2,7 @@ import { Router } from "express";
 import { products } from "../ProductManager.js";
 
 const router = Router();
-
+// obtener productos 
 router.get('/', async(req,res)=> {
     try {
         const prod = await products.getProducts(req.query);
@@ -12,6 +12,7 @@ router.get('/', async(req,res)=> {
     }
     
 });
+
 
 router.get('/:pid', async(req,res)=>{
     try {
