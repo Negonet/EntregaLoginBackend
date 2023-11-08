@@ -4,6 +4,8 @@ import cartRouter from './routes/cart.router.js'
 import { __dirname } from './utils.js';
 import { engine } from 'express-handlebars';
 import viewsRouter from './routes/views.router.js';
+import { products } from './ProductManager.js';
+import { Server } from 'socket.io';
 
 
 // config
@@ -23,6 +25,17 @@ app.use('/api/cart', cartRouter);
 app.use('/api/views', viewsRouter);
 
 
-app.listen(8080,()=>{
+const httpServer = app.listen(8080,()=>{
     console.log('listen!');
-})
+});
+
+
+const socketServer = new Server(httpServer);
+
+socketServer.on('connection', socket=> {
+    console.log(`cliente conectado: ${socket.id}`);
+    socket.on('newProduct', async (prod) => {
+        const newProdList = await products.addNew(prod)
+        socketServer.emit('addNew', newProdList);
+    });
+});

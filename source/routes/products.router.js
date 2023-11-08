@@ -70,9 +70,9 @@ router.post ('/addProd', async (req,res) => {
     }
     try {
         const crearProducto = await products.addNew(req.body)
-        //console.log(crearProducto)
+
         res.redirect(`/api/views/home/${crearProducto.id}`);
-        //res.status(200).json({message:'Producto creado', crearProducto});
+
     } catch (err) {
         res.status(500).json({message:err.message});
     }

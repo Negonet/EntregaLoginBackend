@@ -32,18 +32,22 @@ class ProductManager {
             } else {
                 id=products[products.length-1].id+1
             }
+            if(!product.title || !product.description || !product.price || !product.code || !product.stock || !product.category){
+                console.log('Falta un dato');
+                return products
+            } else {
             const addProduct = {...product,status:true,id}
             const found = products.find((item) => 
                  item.code === product.code) 
                 if (!found) {
                     products.push(addProduct)
                     await fs.promises.writeFile(path, JSON.stringify(products))
-                    return addProduct
+                    return products
                 } else {
                     
                     console.log('producto ya ingresado')
-                    console.log(addProduct)
-                }
+                    return products
+                }}
         } catch (err) {
             return err 
         }}

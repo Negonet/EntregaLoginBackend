@@ -1,1 +1,28 @@
-<h3>second view</h3>
+<h3>Agregar producto</h3>
+
+
+
+<form id="form" >
+    Nombre del Producto: <input type="text" name="title" id="title">
+    Descripcion del Producto: <input type="text" name="description" id="description">
+    Precio del Producto: <input type="number" name="price" id="price">
+    Codigo del Producto: <input type="number" name="code" id="code">
+    Cantidad de unidades: <input type="number" name="stock" id="stock">
+    Categoria del Producto: <input type="text" name="category" id="category">
+    <input type="submit" value="ENTER">
+</form>
+
+<h3>Eliminar producto por Id</h3>
+
+<form action="/api/products/delete" method="delete" id="form">
+Id del Producto: <input type="number" name="idd" id="idd">
+<input type="submit" value="ENTER">
+</form>
+
+<h2>Lista de productos Actualizada</h2>
+
+<div id="productList"></div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
