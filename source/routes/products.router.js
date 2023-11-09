@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { products } from "../ProductManager.js";
-
+import { products } from "../db/dao/ProductManagerDB.js";
 const router = Router();
 // obtener productos 
 router.get('/', async(req,res)=> {
@@ -25,11 +24,11 @@ router.get('/:pid', async(req,res)=>{
 });
 
 router.post ('/', async (req,res) => {
-    const { title, description, price, code, stock, category} = req.body
+    //const { title, description, price, code, stock, category} = req.body
 
-    if(!title || !description || !price || !code || !stock || !category){
-        res.status(404).json({message:'Falta un dato'});
-    }
+    // if(!title || !description || !price || !code || !stock || !category){
+    //     res.status(404).json({message:'Falta un dato'});
+    // }
     try {
         const crearProducto = await products.addNew(req.body)
         //console.log(crearProducto)

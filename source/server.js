@@ -4,7 +4,8 @@ import cartRouter from './routes/cart.router.js'
 import { __dirname } from './utils.js';
 import { engine } from 'express-handlebars';
 import viewsRouter from './routes/views.router.js';
-import { products } from './ProductManager.js';
+import { products } from './db/dao/ProductManager.js';
+import './db/configDB.js'
 import { Server } from 'socket.io';
 
 
