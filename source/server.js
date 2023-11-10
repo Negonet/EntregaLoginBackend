@@ -4,7 +4,7 @@ import cartRouter from './routes/cart.router.js'
 import { __dirname } from './utils.js';
 import { engine } from 'express-handlebars';
 import viewsRouter from './routes/views.router.js';
-import { products } from './db/dao/ProductManager.js';
+import { products } from './db/dao/ProductManagerDB.js';
 import './db/configDB.js'
 import { Server } from 'socket.io';
 
@@ -35,8 +35,14 @@ const socketServer = new Server(httpServer);
 
 socketServer.on('connection', socket=> {
     console.log(`cliente conectado: ${socket.id}`);
+    
+    //agregar producto
     socket.on('newProduct', async (prod) => {
-        const newProdList = await products.addNew(prod)
-        socketServer.emit('addNew', newProdList);
+        const newProdList = await products.addNew(prod);
+        const actu = await products.getProducts();
+        socketServer.emit('addNew', actu);
     });
+
+    // socket.on(''
+    // )
 });

@@ -1,48 +1,52 @@
 import { productsModel } from "../models/products.model.js";
 
-const path = 'productos.json'
-
 class ProductManager {
 
     async getProducts(queryObj){
-            const {limit} = queryObj;
+            //const {limit} = queryObj;
     
             try {
                 const findProds = await productsModel.find()
-                return limit ? findProds.slice(0, +limit) : findProds
-
+                //console.log(findProds);
+                return /*limit ? findProds.slice(0, +limit) :*/ findProds
+                
             } catch (err) {
                 return err
             }}
             
     async addNew(product){
-        try {
-            const createOne = await productsModel.create(product)
-            return createOne
-        } catch (err) {
-            return err 
-        }}
+        
+        if (product.code > 0) {
+            try {
+                const createOne = await productsModel.create(product)
+                return createOne
+            } catch (err) {
+                return err 
+            }
+        }   
+    } 
+        
 
     async getProductById(id){
-        try {
-            const products = await this.getProducts({})
-            const found = products.find((product) => product.id === id)
-            if (found) {
-                return found   
-            } else {
-            console.log('Producto no encontrado')
-            }
-
-        } catch (err){
-            return err
-        }}
+        
+        if (id !== '') {
+            try {
+                const findById = await productsModel.findById(id)
+                return findById   
+            } catch (err){
+                return err
+             } 
+        }   else {
+                console.log('Producto no encontrado')
+        }
+    }
 
     async deleteProduct(idd){
         try{
-            console.log(idd)
+            //console.log(idd)
             const products = await this.getProducts({})
             const findId = products.filter((prod) => prod.id === idd)
-            console.log(findId)
+            //console.log(findId)
             if (findId) {
                 const neWProdArr = products.filter((prod) => prod.id !== idd)
                 await fs.promises.writeFile(path,JSON.stringify(neWProdArr))

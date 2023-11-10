@@ -62,11 +62,11 @@ router.delete('/:pid', async (req,res) => {
 
 //add prod handlebars
 router.post ('/addProd', async (req,res) => {
-    const { title, description, price, code, stock, category} = req.body
+    //const { title, description, price, code, stock, category} = req.body
 
-    if(!title || !description || !price || !code || !stock || !category){
-        res.status(404).json({message:'Falta un dato'});
-    }
+    // if(!title || !description || !price || !code || !stock || !category){
+    //     res.status(404).json({message:'Falta un dato'});
+    // }
     try {
         const crearProducto = await products.addNew(req.body)
 

@@ -23,6 +23,7 @@ form.onsubmit = (e) => {
 
     }
     socketClient.emit('newProduct', prod);
+    
 };
 
 socketClient.on('addNew', (newProdList) =>{
@@ -35,10 +36,10 @@ socketClient.on('addNew', (newProdList) =>{
                     <h4>Codigo : ${p.code}</h4>
                     <h4>Stock : ${p.stock}</h4>
                     <h4>Categoria : ${p.category}</h4>
-                    <h4>Id : ${p.id}</h4>
+                    <h4>Id : ${p._id}</h4>
                     <hr>`;
         }).join(" ");
 
-    console.log(newProdList)
+    //console.log(newProdList)
     showList.innerHTML = products;
 });

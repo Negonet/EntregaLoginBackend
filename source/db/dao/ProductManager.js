@@ -68,10 +68,10 @@ class ProductManager {
 
     async deleteProduct(idd){
         try{
-            console.log(idd)
+            //console.log(idd)
             const products = await this.getProducts({})
             const findId = products.filter((prod) => prod.id === idd)
-            console.log(findId)
+            //console.log(findId)
             if (findId) {
                 const neWProdArr = products.filter((prod) => prod.id !== idd)
                 await fs.promises.writeFile(path,JSON.stringify(neWProdArr))
