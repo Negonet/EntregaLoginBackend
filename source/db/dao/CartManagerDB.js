@@ -13,7 +13,7 @@ class CartManager {
     async searchCart(id) {
         
         try {
-            const readCart = await cartsModel.findById(id);
+            const readCart = await cartsModel.findById(id).populate('products.product');
             if (readCart) {
                 return readCart   
             } else {
