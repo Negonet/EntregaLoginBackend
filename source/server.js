@@ -22,7 +22,7 @@ app.set("view engine", "handlebars");
 
 // routes
 app.use('/api/products', productRouter);
-app.use('/api/cart', cartRouter);
+app.use('/api/carts', cartRouter);
 app.use('/api/views', viewsRouter);
 
 

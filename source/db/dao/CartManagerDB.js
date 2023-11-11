@@ -4,9 +4,9 @@ class CartManager {
     
     async createCart(){
         
-        const newCart = { products: []};
+        const newCart = { products: []} ;
         const addCartDB = await cartsModel.create(newCart);
-        return addCartDB
+        return addCartDB;
     }; 
 
 
@@ -25,25 +25,21 @@ class CartManager {
     }};
 
 
-    async updateCart (idCart, Prod) {
-        
-        try {
-            const readCart = await cartsModel.findById(idCart)
-
-            const ifInCart = readCart.products.findIndex((p) => p.product === Prod)
-            
-            
-            if ( ifInCart ===-1 ) {
-                readCart.products.push({product: Prod, quantity: 1});
+    async updateCart (idCart, idProduct) {
                
-            }   else{
-                readCart.products[ifInCart].quantity++;
-            }
+        const readCart = await cartsModel.findById(idCart);
 
-            await readCart.save();
-        } catch (err) {
-            return err
+        const ifInCart = readCart.products.findIndex((p) => p.product.equals (idProduct));
+        
+        if ( ifInCart === -1 ) {
+            readCart.products.push({product: idProduct, quantity: 1});
+            
+        }   else{
+            readCart.products[ifInCart].quantity++;
         }
+
+        return readCart.save();
+   
     }
 
 
