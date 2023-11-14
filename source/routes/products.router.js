@@ -50,9 +50,10 @@ router.put ('/:pid', async (req,res) => {
 });
 
 router.delete('/:pid', async (req,res) => {
+    const {idd} = req.params.pid
+    console.log(req.params.pid)
     try {
-        const idd = req.params.pid
-        //console.log(idd)
+        
         const deleted = await products.deleteProduct(+idd)
         //console.log(deleted)
     } catch (err) {
@@ -60,22 +61,23 @@ router.delete('/:pid', async (req,res) => {
     }
 });
 
-//add prod handlebars
-router.post ('/addProd', async (req,res) => {
-    //const { title, description, price, code, stock, category} = req.body
 
-    // if(!title || !description || !price || !code || !stock || !category){
-    //     res.status(404).json({message:'Falta un dato'});
-    // }
-    try {
-        const crearProducto = await products.addNew(req.body)
 
-        res.redirect(`/api/views/home/${crearProducto.id}`);
+//rutas handlebars
+// router.post ('/addProd', async (req,res) => {
+//     //const { title, description, price, code, stock, category} = req.body
 
-    } catch (err) {
-        res.status(500).json({message:err.message});
-    }
-});
+//     // if(!title || !description || !price || !code || !stock || !category){
+//     //     res.status(404).json({message:'Falta un dato'});
+//     // }
+//     try {
+//         const crearProducto = await products.addNew(req.body)
 
+//         res.redirect(`/api/views/home/${crearProducto.id}`);
+
+//     } catch (err) {
+//         res.status(500).json({message:err.message});
+//     }
+// });
 
 export default router;

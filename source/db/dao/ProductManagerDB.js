@@ -44,14 +44,15 @@ class ProductManager {
     async deleteProduct(idd){
         try{
             //console.log(idd)
-            const products = await this.getProducts({})
-            const findId = products.filter((prod) => prod.id === idd)
+            const products = await productsModel.findByIdAndDelete(idd)
+
+            // const findId = products.filter((prod) => prod.id === idd)
             //console.log(findId)
-            if (findId) {
-                const neWProdArr = products.filter((prod) => prod.id !== idd)
-                await fs.promises.writeFile(path,JSON.stringify(neWProdArr))
+            if (products) {
+                return products;
             } else {
-                console.log('no se encuentra el producto')
+                return products;
+                //console.log('no se encuentra el producto')
             }
 
         } catch(err) {

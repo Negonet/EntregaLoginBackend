@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { products } from "../db/dao/ProductManager.js";
+import { products } from "../db/dao/ProductManagerDB.js";
 const router = Router();
 
 
 router.get('/home', async(req,res)=> {
     try {
-        const prod = await products.getProducts(req.query);
-        res.render('home', {prod});
+        const prod = await products.getProducts();
+        console.log(prod)
+        res.render('home',{prod});
 
     } catch (err) {
         res.status(500).json({message:err.message});
@@ -33,13 +34,7 @@ router.get('/home/:idProd', async (req, res) => {
 
 router.get('/realTimeProducts', async (req, res) => {
     
-    try {
-        const prod = await products.getProducts(req.query);
-        res.render("realTimeProducts", {prod});
-
-    } catch (err) {
-        res.status(500).json({message:err.message});
-    }
+    res.render('realTimeProducts');
     
 });
 

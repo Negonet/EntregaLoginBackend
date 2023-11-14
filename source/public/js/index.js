@@ -4,27 +4,54 @@ socketClient.on('welcome', (message) => {
     alert(message)
 });
 
-const form = document.getElementById('form');
+const addForm = document.getElementById('addForm');
 const title = document.getElementById('title');
 const showList = document.getElementById('productList');
+const deleteForm = document.getElementById('deleteForm');
+const createProd = document.getElementById('create');
+const updateProd = document.getElementById('update');
 
 
-form.onsubmit = (e) => {
+// add item
+createProd.addEventListener('click', create);
+
+function create (e) {
     e.preventDefault();
     const prod = {
 
-        title : form.title.value,
-        description : form.description.value,
-        price : form.price.value,
-        thumbnail : form.title.value + form.description.value,
-        code : form.code.value,
-        stock : form.stock.value,
-        category : form.category.value,
+        title : addForm.title.value,
+        description : addForm.description.value,
+        price : addForm.price.value,
+        thumbnail : addForm.title.value + addForm.description.value,
+        code : addForm.code.value,
+        stock : addForm.stock.value,
+        category : addForm.category.value,
 
     }
     socketClient.emit('newProduct', prod);
     
 };
+// update item
+updateProd.addEventListener('click', update);
+
+function update (e) {
+    e.preventDefault();
+    const prod = {
+
+        title : addForm.title.value,
+        description : addForm.description.value,
+        price : addForm.price.value,
+        thumbnail : addForm.title.value + addForm.description.value,
+        code : addForm.code.value,
+        stock : addForm.stock.value,
+        category : addForm.category.value,
+        _id: addForm.id.value,
+
+    }
+    socketClient.emit('newProduct', prod);
+    
+
+}
 
 socketClient.on('addNew', (newProdList) =>{
 
@@ -43,3 +70,16 @@ socketClient.on('addNew', (newProdList) =>{
     //console.log(newProdList)
     showList.innerHTML = products;
 });
+
+
+
+// delete item
+
+deleteForm.onsubmit = (e) => {
+    e.preventDefault();
+    const dProd = idd.value
+    socketClient.emit('deleteProd', dProd);
+    
+};
+
+

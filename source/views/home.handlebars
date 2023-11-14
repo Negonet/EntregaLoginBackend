@@ -2,14 +2,14 @@
 {{#if prod}}
 
 {{#each prod}}
-<h4>Nombre del Producto : {{title}}</h4>
-<h4>Detalle : {{description}}</h4>
-<h4>Precio : $ {{price}}</h4>
-<h4>Thumbnail : {{thumbnail}}</h4>
-<h4>Codigo : {{code}}</h4>
-<h4>Stock : {{stock}}</h4>
-<h4>Categoria : {{category}}</h4>
-<h4>Id : {{id}}</h4>
+<h4>Nombre del Producto : {{title.value}}</h4>
+<h4>Detalle : {{description.value}}</h4>
+<h4>Precio : $ {{price.value}}</h4>
+<h4>Thumbnail : {{thumbnail.value}}</h4>
+<h4>Codigo : {{code.value}}</h4>
+<h4>Stock : {{stock.value}}</h4>
+<h4>Categoria : {{category.value}}</h4>
+<h4>Id : {{_id.value}}</h4>
 <hr>
 
 {{/each}}

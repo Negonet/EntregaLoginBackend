@@ -43,6 +43,10 @@ socketServer.on('connection', socket=> {
         socketServer.emit('addNew', actu);
     });
 
-    // socket.on(''
-    // )
+    socket.on('deleteProd', async (dProd)  => {
+        console.log(dProd)
+        const newProdList = await products.deleteProduct(dProd);
+        const actu = await products.getProducts();
+        socketServer.emit('addNew', actu);
+    });
 });
