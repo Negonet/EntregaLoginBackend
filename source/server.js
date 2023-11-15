@@ -36,16 +36,23 @@ const socketServer = new Server(httpServer);
 socketServer.on('connection', socket=> {
     console.log(`cliente conectado: ${socket.id}`);
     
-    //agregar producto
+    //add product
     socket.on('newProduct', async (prod) => {
         const newProdList = await products.addNew(prod);
         const actu = await products.getProducts();
         socketServer.emit('addNew', actu);
     });
-
+    //delete product
     socket.on('deleteProd', async (dProd)  => {
         console.log(dProd)
         const newProdList = await products.deleteProduct(dProd);
+        const actu = await products.getProducts();
+        socketServer.emit('addNew', actu);
+    });
+    //update product
+    socket.on('updateProd', async (uProd) => {
+        //console.log(uProd)
+        const update = await products.updateProduct(uProd)
         const actu = await products.getProducts();
         socketServer.emit('addNew', actu);
     });

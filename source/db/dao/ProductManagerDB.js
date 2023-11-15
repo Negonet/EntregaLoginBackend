@@ -43,16 +43,12 @@ class ProductManager {
 
     async deleteProduct(idd){
         try{
-            //console.log(idd)
             const products = await productsModel.findByIdAndDelete(idd)
-
-            // const findId = products.filter((prod) => prod.id === idd)
-            //console.log(findId)
             if (products) {
                 return products;
             } else {
                 return products;
-                //console.log('no se encuentra el producto')
+
             }
 
         } catch(err) {
@@ -60,27 +56,16 @@ class ProductManager {
         }
     }
 
-    async updateProduct (prod) {
+    async updateProduct (uProd) {
+        const id = uProd._id
+
         try {
-            const products = await this.getProducts({})
-            const updated = products.findIndex((product) => product.id === prod.id)
-            console.log(updated)
-            if ( updated >= 0 ) {
-                products[updated] = prod;
-                await fs.promises.writeFile(path ,JSON.stringify(products))
-                console.log(prod)
-            } 
-                else{
-                console.log('no se encuentra el producto')
-            }
+            const products = await productsModel.findByIdAndUpdate(id, uProd)
+            return products
         } catch (err) {
             return err
         }
     }
 }
-
-
-
-
 
 export const products = new ProductManager();

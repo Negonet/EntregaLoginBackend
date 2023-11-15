@@ -31,12 +31,13 @@ function create (e) {
     socketClient.emit('newProduct', prod);
     
 };
+
 // update item
 updateProd.addEventListener('click', update);
 
 function update (e) {
     e.preventDefault();
-    const prod = {
+    const uProd = {
 
         title : addForm.title.value,
         description : addForm.description.value,
@@ -48,7 +49,7 @@ function update (e) {
         _id: addForm.id.value,
 
     }
-    socketClient.emit('newProduct', prod);
+    socketClient.emit('updateProd', uProd);
     
 
 }
@@ -67,7 +68,6 @@ socketClient.on('addNew', (newProdList) =>{
                     <hr>`;
         }).join(" ");
 
-    //console.log(newProdList)
     showList.innerHTML = products;
 });
 
