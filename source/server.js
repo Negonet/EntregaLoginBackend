@@ -56,4 +56,9 @@ socketServer.on('connection', socket=> {
         const actu = await products.getProducts();
         socketServer.emit('addNew', actu);
     });
+
+    //receive chat user
+    socket.on('newUser', (user) => {
+        console.log(`Nuevo usuario ${user}`);
+    });
 });
