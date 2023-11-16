@@ -1,6 +1,18 @@
-import { chatsModel } from "../models/chats.model";
+import { chatsModel } from "../models/chats.model.js";
 
 class ChatManager {
+
+    async getChat(){
+
+        try {
+            const findChat = await chatsModel.find()
+            
+            return findChat
+            
+        } catch (err) {
+            return err
+        }
+    };
 
     async updateList(chat) {
         try {
@@ -14,4 +26,4 @@ class ChatManager {
 
 }
 
-export const chats = new ChatManager();
+export const chatsManager = new ChatManager();

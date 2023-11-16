@@ -7,6 +7,7 @@ import viewsRouter from './routes/views.router.js';
 import { products } from './db/dao/ProductManagerDB.js';
 import './db/configDB.js'
 import { Server } from 'socket.io';
+import { chatsManager } from './db/dao/ChatsManagerDB.js';
 
 
 // config
@@ -59,6 +60,14 @@ socketServer.on('connection', socket=> {
 
     //receive chat user
     socket.on('newUser', (user) => {
-        console.log(`Nuevo usuario ${user}`);
+        socket.broadcast.emit('nuevoUsuario', user);
     });
+    //update chat
+    socket.on('message', async (infoMessage) => {
+        const addMessage = await chatsManager.updateList(infoMessage);
+        const actu = await chatsManager.getChat();
+        socketServer.emit('getChat', actu);
+
+    });
+
 });

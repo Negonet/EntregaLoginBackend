@@ -1,6 +1,8 @@
 const socketClient = io();
 const evName = document.getElementById('name');
 const showChat = document.getElementById('chatList');
+const chatForm = document.getElementById('chatForm');
+const message = document.getElementById('message');
 
 Swal.fire({
     title: 'Bienvenido',
@@ -14,18 +16,30 @@ Swal.fire({
     confirmButtonText: 'Aceptar'
   }).then(input=>{
     user = input.value;
-    //evName.innerText = user;
+    evName.innerText = `Chat de : ${user}` ;
     socketClient.emit('newUser', user)
   });
 
 
-  socketClient.on('addNew', (newChatList) =>{
+socketClient.on('nuevoUsuario', (useR) =>{
+  console.log(`${useR} connected`)
+});
 
-    const chat = newChatList.map((c) => {
-            return `<h4>Usuario : ${c.user}</h4>
-                    <h4>Detalle : ${c.message}</h4>
+chatForm.onsubmit = (e) => {
+  e.preventDefault();
+  const infoMessage = {
+    user: user,
+    message: message.value,
+  };
+  socketClient.emit('message', infoMessage);
+};
+
+socketClient.on('getChat', (actu) => {
+  const chat = actu.map((c) => {
+            return `<p>${c.user} dice : ${c.message}</p>
                     <hr>`;
         }).join(" ");
-
+  
     showChat.innerHTML = chat;
-});
+}) 
+

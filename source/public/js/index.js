@@ -54,6 +54,7 @@ function update (e) {
 
 }
 
+//show list
 socketClient.on('addNew', (newProdList) =>{
 
     const products = newProdList.map((p) => {
