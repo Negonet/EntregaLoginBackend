@@ -1,6 +1,6 @@
 <h2>Lista de productos</h2>
 {{#if prod}}
-
+<h4>{{prod.title}}</h4>
 {{#each prod}}
 <h4>Nombre del Producto : {{title}}</h4>
 <h4>Detalle : {{description}}</h4>
@@ -12,7 +12,7 @@
 <h4>Id : {{_id}}</h4>
 <hr>
 
-{{/each}}
+{{/each}} 
 {{else}}
 
 <p>productos no encontrados</p>

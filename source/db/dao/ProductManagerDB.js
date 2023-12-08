@@ -6,7 +6,7 @@ class ProductManager {
             //const {limit} = queryObj;
     
             try {
-                const findProds = await productsModel.find()
+                const findProds = await productsModel.paginate()
                 //console.log(findProds);
                 return /*limit ? findProds.slice(0, +limit) :*/ findProds
                 
