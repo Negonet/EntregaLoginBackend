@@ -2,17 +2,29 @@ import { productsModel } from "../models/products.model.js";
 
 class ProductManager {
 
-    async getProducts(queryObj){
+    async getProducts(){
             //const {limit} = queryObj;
     
-            try {
-                const findProds = await productsModel.paginate()
-                //console.log(findProds);
-                return /*limit ? findProds.slice(0, +limit) :*/ findProds
+            
+                const findProds = await productsModel.paginate({});
+
+                const info = {
+                    payload: findProds.docs,
+                    totalPages: findProds.totalPages,
+                    prevPage: findProds.prevPage,
+                    nextPage: findProds.nextPage,
+                    page: findProds.page,
+                    hasPrevPage: findProds.hasPrevPage,
+                    hasNextPage: findProds.hasNextPage,
+                    prevLink: findProds.hasPrevPage ? `http://localhost:8080/api/views?page=${findProds.prevPage}` : null,
+                    nextLink: findProds.hasNextPage ? `http://localhost:8080/api/views?page=${findProds.nextPage}` : null,
+
+                }   
+                console.log(info);
+                return /*limit ? findProds.slice(0, +limit) :*/ {info};
                 
-            } catch (err) {
-                return err
-            }}
+          
+            }
             
     async addNew(product){
         
