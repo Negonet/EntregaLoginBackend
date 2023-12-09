@@ -20,7 +20,7 @@ class ProductManager {
                     nextLink: findProds.hasNextPage ? `http://localhost:8080/api/views?page=${findProds.nextPage}` : null,
 
                 }   
-                console.log(info);
+                //console.log(info);
                 return /*limit ? findProds.slice(0, +limit) :*/ {info};
                 
           

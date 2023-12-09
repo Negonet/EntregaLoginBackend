@@ -42,6 +42,7 @@ socketServer.on('connection', socket=> {
         const newProdList = await products.addNew(prod);
         const actu = await products.getProducts();
         socketServer.emit('addNew', actu);
+        //console.log(actu.info)
     });
     //delete product
     socket.on('deleteProd', async (dProd)  => {

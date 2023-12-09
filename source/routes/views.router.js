@@ -6,9 +6,9 @@ const router = Router();
 router.get('/home', async(req,res)=> {
     try {
         const prod = await products.getProducts();
-        console.log(prod)
+        //console.log(prod)
         res.render('home',{
-            prod: prod.docs.map(prod => prod.toJSON())});
+            prod: prod.info.payload.map(prod => prod.toJSON())});
 
     } catch (err) {
         res.status(500).json({message:err.message});
