@@ -40,7 +40,7 @@ socketServer.on('connection', socket=> {
     //add product
     socket.on('newProduct', async (prod) => {
         const newProdList = await products.addNew(prod);
-        const actu = await products.getProducts();
+        const actu = await products.getAll();
         socketServer.emit('addNew', actu);
         //console.log(actu.info)
     });

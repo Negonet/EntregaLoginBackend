@@ -2,29 +2,36 @@ import { productsModel } from "../models/products.model.js";
 
 class ProductManager {
 
-    async getProducts(){
-            //const {limit} = queryObj;
+    async getAll(){
+        const findAll = await productsModel.find();
+        console.log(findAll)
+        return findAll
+    }
     
-            
-                const findProds = await productsModel.paginate({});
+    async getProducts(obj){
+        const {limit = 10, page = 1} = obj;
+        console.log(obj)
 
-                const info = {
-                    payload: findProds.docs,
-                    totalPages: findProds.totalPages,
-                    prevPage: findProds.prevPage,
-                    nextPage: findProds.nextPage,
-                    page: findProds.page,
-                    hasPrevPage: findProds.hasPrevPage,
-                    hasNextPage: findProds.hasNextPage,
-                    prevLink: findProds.hasPrevPage ? `http://localhost:8080/api/views?page=${findProds.prevPage}` : null,
-                    nextLink: findProds.hasNextPage ? `http://localhost:8080/api/views?page=${findProds.nextPage}` : null,
+    
+        const findProds = await productsModel.paginate({}, {limit, page});
 
-                }   
-                //console.log(info);
-                return /*limit ? findProds.slice(0, +limit) :*/ {info};
-                
-          
-            }
+        const info = {
+            payload: findProds.docs,
+            totalPages: findProds.totalPages,
+            prevPage: findProds.prevPage,
+            nextPage: findProds.nextPage,
+            page: findProds.page,
+            hasPrevPage: findProds.hasPrevPage,
+            hasNextPage: findProds.hasNextPage,
+            prevLink: findProds.hasPrevPage ? `http://localhost:8080/api/views?page=${findProds.prevPage}` : null,
+            nextLink: findProds.hasNextPage ? `http://localhost:8080/api/views?page=${findProds.nextPage}` : null,
+
+        }   
+        //console.log(info);
+        return /*limit ? findProds.slice(0, +limit) :*/ {info};
+        
+    
+    }
             
     async addNew(product){
         

@@ -5,7 +5,7 @@ const router = Router();
 
 router.get('/home', async(req,res)=> {
     try {
-        const prod = await products.getProducts();
+        const prod = await products.getProducts(req.query);
         //console.log(prod)
         res.render('home',{
             prod: prod.info.payload.map(prod => prod.toJSON())});

@@ -56,8 +56,8 @@ function update (e) {
 
 //show list
 socketClient.on('addNew', (newProdList) =>{
-    console.log(newProdList.info.payload)
-    const products = newProdList.info.payload.map((p) => {
+
+    const products = newProdList.map((p) => {
             return `<h4>Nombre del Producto : ${p.title}</h4>
                     <h4>Detalle : ${p.description}</h4>
                     <h4>Precio : $ ${p.price}</h4>
