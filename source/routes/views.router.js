@@ -16,6 +16,19 @@ router.get('/home', async(req,res)=> {
     
 });
 
+router.get('/products', async(req,res)=> {
+    try {
+        const prod = await products.getProducts(req.query);
+        //console.log(prod)
+        res.render('products',{
+            prod: prod.info.payload.map(prod => prod.toJSON())});
+
+    } catch (err) {
+        res.status(500).json({message:err.message});
+    }
+    
+});
+
 router.get('/addProd' , (req,res) => {
 
     res.render('addProd')

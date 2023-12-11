@@ -9,11 +9,12 @@ class ProductManager {
     }
     
     async getProducts(obj){
-        const {limit = 10, page = 1} = obj;
-        console.log(obj)
+        const {limit = 10, page = 1, ...filter} = obj;
+       
+        console.log(filter)
 
     
-        const findProds = await productsModel.paginate({}, {limit, page});
+        const findProds = await productsModel.paginate(filter, {limit, page});
 
         const info = {
             payload: findProds.docs,
