@@ -9,14 +9,26 @@ class ProductManager {
     }
     
     async getProducts(obj){
-        const {limit = 10, page = 1, /*price*/ ...filter} = obj;
+        const {limit = 10, page = 1, order, ...filter} = obj;
        
-        console.log(filter)
-
+        let sort
+        if (parseInt(order)===1){
+            sort = 'price'
+        } else if (parseInt(order) ===-1) {
+            sort = '-price'
+        }
+        
+        
+        const options = {
+            page: page,
+            limit: limit,
+            sort
+        }
     
-        const findProds = await productsModel.paginate(filter, /*price*/ {limit, page});
+        const findProds = await productsModel.paginate(filter, options);
 
         const info = {
+            status: findProds.docs ? "success" : "error",
             payload: findProds.docs,
             totalPages: findProds.totalPages,
             prevPage: findProds.prevPage,
@@ -28,7 +40,7 @@ class ProductManager {
             nextLink: findProds.hasNextPage ? `http://localhost:8080/api/views?page=${findProds.nextPage}` : null,
 
         }   
-        //console.log(info);
+        console.log(info);
         return /*limit ? findProds.slice(0, +limit) :*/ {info};
         
     
